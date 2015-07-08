@@ -1,6 +1,9 @@
 var express = require('express');
-
+var path = require('path');
 var router = express.Router();
+
+//Database Models
+var user = require(path.join(__dirname, 'models/user'));
 
 
 router.get('/', function(req, res){
@@ -17,8 +20,8 @@ router.get('/register', function(req, res){
 
 router.post('/register', function(req, res){
 	data = req.body;
-	console.log(data);
-	res.json(data);
+	user.register(data)
+	res.redirect('/');
 });
 
 module.exports = router;

@@ -4,7 +4,18 @@ var app = express();
 var path = require('path');
 var parser = require('body-parser');
 var expressLayout = require('express-ejs-layouts');
+var mongoose = require('mongoose');
+
+//Custom Modules
 var router = require('./router');
+
+//Connect to DB
+mongoose.connect('mongodb://localhost/auth', function (error) {
+    if (error) {
+        console.log(error);
+    }
+});
+
 //Configuration App
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
