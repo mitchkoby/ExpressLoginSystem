@@ -14,14 +14,30 @@ router.get('/login', function(req, res){
 	res.render('login', {layout: 'base', title: "Login"});
 });
 
+router.post('/login', function(req, res){
+	data = req.body;
+	user.login(data, function(result){
+		if(!result) {
+			res.render('login', {layout: 'base', title: "Login", message: "Invalid Login"});
+		} else {
+			res.redirect('/');
+		}
+	});
+});
+
 router.get('/register', function(req, res){
-	res.render('register', {layout: 'base', title: "register"});
+	res.render('register', {layout: 'base', title: "Register"});
 });
 
 router.post('/register', function(req, res){
 	data = req.body;
-	user.register(data)
-	res.redirect('/');
+	user.register(data, function(result){
+		if(result) {
+			res.redirect('/');
+		} else {
+			res.render('register', {layout: 'base', title: "Register", message: "Invalid Registration"});
+		}
+	});
 });
 
 module.exports = router;

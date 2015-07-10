@@ -22,8 +22,27 @@ userSchema.statics.register = function(data, cb){
             cb(false);
         }
     });
-};
+}
 
+userSchema.statics.login = function(data, cb){
+
+    user.findOne({username: data.username}, function(err, user){
+
+        if(!err && user){
+            if(user.password == data.password){
+                user.save(function(err){
+                    if(!err){
+                        cb(user);
+                    } else {
+                        cb(false);
+                    }
+                });
+            }    
+        } else{
+            cb(false);
+        }
+    });
+}
 
 // Mongoose Model definition
 var user = mongoose.model('users', userSchema);

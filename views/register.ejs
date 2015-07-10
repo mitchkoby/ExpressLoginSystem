@@ -7,6 +7,7 @@
 	<h2>Register</h2>
 	<form role="form" action="" method="post" name="register">
 		<div class="form-group">
+		<% if (typeof message !== 'undefined') { %> <span><%= message %></span><br> <% } %>
 		<label for="username">Username:</label>
 			<input type="username" class="form-control" id="username" name="username">
 		</div>
